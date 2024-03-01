@@ -29,6 +29,8 @@ class Product(models.Model):
     catagory = models.CharField(max_length=200)
     brand = models.CharField(max_length=50)
     country = models.CharField(max_length=40)
+    quantity = models.IntegerField(default=0)
+    rating = models.FloatField(default=0.0)
     img = models.ImageField(upload_to='media/')
     description = models.CharField(max_length=500)
 

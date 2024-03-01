@@ -17,6 +17,7 @@ from django.shortcuts import render,redirect,get_object_or_404
 from django.db import IntegrityError
 from .models import addData,Product
 from django.conf import settings
+from .forms import updateProduct
 
 
 def addQ(request):
@@ -57,10 +58,6 @@ def trial(request):
 def edit(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     return render(request, 'edit.html', {'product': product})
-# def edit(request,product_id):
-#     return render(request, 'edit.html', {'product_id': product_id})
-    # products = get_object_or_404(Product, pk=product_id)
-    # return render(request, 'edit.html', {'products': products})
 
 
 def product_list(request):
@@ -87,6 +84,8 @@ def your_view_name(request):
         catagory = request.POST.get('catagory')
         brand = request.POST.get('brand')
         country = request.POST.get('country')
+        quantity = request.POST.get('quantity')
+        rating = request.POST.get('rating')
         picture = request.FILES.get('picture')
         description = request.POST.get('description')
 
@@ -97,6 +96,8 @@ def your_view_name(request):
             catagory=catagory,
             brand=brand,
             country=country,
+            quantity=quantity,
+            rating = rating,
             img=picture,
             description=description
         )
@@ -113,30 +114,21 @@ def delete_product(request, product_id):
    
 
 
-# views.py
 
 
 # def update_product(request, product_id):
-#     product = get_object_or_404(Product, id=product_id)
-
+#     product = get_object_or_404(Product, pk=product_id)
+    
 #     if request.method == 'POST':
-#         # Update fields if present in the form data
-#         product.name = request.POST.get('name', product.name)
-#         product.price = request.POST.get('price', product.price)
-#         product.catagory = request.POST.get('category', product.catagory)
-#         product.brand = request.POST.get('brand', product.brand)
-#         product.country = request.POST.get('country', product.country)
-#         picture = request.FILES.get('picture',product.img)
-#         product.description = request.POST.get('description', product.description)
+#         form = updateProduct(request.POST, request.FILES, instance=product)
+#         if form.is_valid():
+#             form.save()
+#             # Redirect or do something else upon successful update
+#     else:
+#         form = updateProduct(instance=product)
 
-#         # Save the updated product instance
-#         product.filter(id=product_id).update()
+#     return render(request, 'adminview.html', {'form': form, 'product': product})
 
-#         return redirect('product')
-
-#     return render(request, 'update_product.html', {'product': product})
-
-# views.py
 
 
 def update_product(request, product_id):
@@ -148,6 +140,7 @@ def update_product(request, product_id):
         catagory = request.POST.get('catagory',product.catagory)
         brand = request.POST.get('brand',product.brand)
         country = request.POST.get('country',product.country)
+        quantity = request.POST.get('quantity',product.quantity)
         picture = request.FILES.get('picture',product.img)
         description = request.POST.get('description',product.description)
 
@@ -162,6 +155,7 @@ def update_product(request, product_id):
             catagory=catagory,
             brand=brand,
             country=country,
+            quantity = quantity,
             img=f"{settings.MEDIA_URL}{picture}",
             description=description
         )

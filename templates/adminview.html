@@ -26,6 +26,8 @@
 
 	<body>
 
+
+
 		<!-- Start Header/Navigation -->
 		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
 
@@ -93,9 +95,12 @@
                           <th class="product-thumbnail">Image</th>
                           <th class="product-name">Product</th>
                           <th class="product-price">Price</th>
+						  <th class="product-category">Category</th>
+						  <th class="product-brand">Brand</th>
+						  <th class="product-country">Country</th>
                           <th class="product-quantity">Quantity</th>
-                          <th class="product-total">Edit</th>
-						  <th class="product-remove">Edit</th>
+                          <!-- <th class="product-total">Edit</th> -->
+						  <th class="product-edit">Edit</th>
                           <th class="product-remove">Remove</th>
                         </tr>
                       </thead>
@@ -109,8 +114,10 @@
                             <h2 class="h5 text-black">{{ product.name }}</h2>
                           </td>
                           <td>{{ product.price }}</td>
+						  <td>{{ product.catagory }}</td>
 						  <td>{{ product.brand }}</td>
-                          <td>{{ product.catagory }}</td>
+						  <td>{{ product.country }}</td>
+                          <td>{{ product.quantity }}</td>
 						  <td><a href="{% url 'edit' product.id %}" class="btn btn-secondary me-2">Edit</a></td>
                           <td><a href="{% url 'delete_product' product.id %}" class="btn btn-black btn-sm">X</a></td>
                         </tr>
@@ -121,6 +128,7 @@
                 </form>
               </div>
 			  <p><a href="{% url 'demo'%}" class="btn btn-secondary me-2">Add More Product</a></p>
+			  
 {% comment %} user details {% endcomment %}
 
 			  <div class="untree_co-section before-footer-section">
