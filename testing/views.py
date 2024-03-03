@@ -76,7 +76,7 @@ def product_list_shop(request):
 
 
 
-def your_view_name(request):
+def addProduct(request):
     n=''
     if request.method == 'POST':
         name = request.POST.get('name')
