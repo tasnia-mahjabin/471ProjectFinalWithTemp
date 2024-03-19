@@ -15,39 +15,41 @@
 
 from django.shortcuts import render,redirect,get_object_or_404
 from django.db import IntegrityError
-from .models import addData,Product
+from .models import addData,Product,user
 from django.conf import settings
 from .forms import updateProduct
+from django.db.models import Q
 
 
-def addQ(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        country = request.POST.get('country')
-        price = request.POST.get('price')
+# def addQ(request):
+#     if request.method == 'POST':
+#         name = request.POST.get('name')
+#         country = request.POST.get('country')
+#         price = request.POST.get('price')
 
-        # Check if an object with the same name already exists
-        existing_object = addData.objects.filter(name=name).first()
+#         # Check if an object with the same name already exists
+#         existing_object = addData.objects.filter(name=name).first()
 
-        if existing_object:
-            # Duplicate found, handle accordingly (e.g., display an error message)
-            return render(request, 'demo.html', {'message': 'Entry with this name already exists.'})
+#         if existing_object:
+#             # Duplicate found, handle accordingly (e.g., display an error message)
+#             return render(request, 'demo.html', {'message': 'Entry with this name already exists.'})
 
-        try:
-            # No duplicate found, save the new object
-            new_entry = addData(name=name, country=country, price=price)
-            new_entry.save()
-            return render(request, 'about.html', {'message': 'Entry added successfully.'})
+#         try:
+#             # No duplicate found, save the new object
+#             new_entry = addData(name=name, country=country, price=price)
+#             new_entry.save()
+#             return render(request, 'about.html', {'message': 'Entry added successfully.'})
 
-        except IntegrityError as e:
-            # Handle other integrity errors as needed
-            return render(request, 'demo.html', {'message': 'An error occurred: {}'.format(str(e))})
+#         except IntegrityError as e:
+#             # Handle other integrity errors as needed
+#             return render(request, 'demo.html', {'message': 'An error occurred: {}'.format(str(e))})
 
-    else:
-        # Handle GET requests or render the form
-        return render(request, 'about.html')
+#     else:
+#         # Handle GET requests or render the form
+#         return render(request, 'about.html')
 
-
+def tryf(request):
+    return render(request, "sign-up.html")
 def demo(request):
     return render(request, "editproduct.html")
 
@@ -69,7 +71,13 @@ def product_list(request):
 
 def product_list_shop(request):
     # Retrieve all products from the database
-    products = Product.objects.all()
+    if request.method == 'POST':
+        searched = request.POST.get('searched')
+        multiple_q = Q(Q(name__contains=searched) | Q(catagory__contains=searched))
+        products = Product.objects.filter(multiple_q)
+
+    else:
+        products = Product.objects.all()
 
     # Pass the products to the template
     return render(request, 'shop.html', {'products': products})
@@ -107,6 +115,8 @@ def addProduct(request):
         # return render(request, 'editproduct.html',{'n':n})
         # return redirect('success_page')  # Redirect to a success page or another view
     
+
+    
 def delete_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     product.delete()
@@ -116,18 +126,7 @@ def delete_product(request, product_id):
 
 
 
-# def update_product(request, product_id):
-#     product = get_object_or_404(Product, pk=product_id)
-    
-#     if request.method == 'POST':
-#         form = updateProduct(request.POST, request.FILES, instance=product)
-#         if form.is_valid():
-#             form.save()
-#             # Redirect or do something else upon successful update
-#     else:
-#         form = updateProduct(instance=product)
 
-#     return render(request, 'adminview.html', {'form': form, 'product': product})
 
 
 
@@ -141,6 +140,7 @@ def update_product(request, product_id):
         brand = request.POST.get('brand',product.brand)
         country = request.POST.get('country',product.country)
         quantity = request.POST.get('quantity',product.quantity)
+        date = request.POST.get('date',product.date)
         picture = request.FILES.get('picture',product.img)
         description = request.POST.get('description',product.description)
 
@@ -156,6 +156,7 @@ def update_product(request, product_id):
             brand=brand,
             country=country,
             quantity = quantity,
+            date = date,
             img=f"{settings.MEDIA_URL}{picture}",
             description=description
         )
@@ -172,7 +173,30 @@ def update_product(request, product_id):
 
     
 
+def addUser(request):
+    n=''
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        password = request.POST.get('password')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        address = request.POST.get('address')
 
+
+        # Save the data to the database
+        user.objects.create(
+            name=name,
+            password = password,
+            email = email,
+            phone = phone,
+            address = address
+            
+        )
+        
+        n="Added"
+        return redirect('okay') 
+        # return render(request, 'editproduct.html',{'n':n})
+        # return redirect('success_page')  # Redirect to a success page or another view
 
 
 

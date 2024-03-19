@@ -1,4 +1,5 @@
 from django.db import models
+from datetime import datetime 
 
 # Create your model
 class addData(models.Model):
@@ -33,6 +34,17 @@ class Product(models.Model):
     rating = models.FloatField(default=0.0)
     img = models.ImageField(upload_to='media/')
     description = models.CharField(max_length=500)
+    date = models.CharField(max_length=50,default="datetime.now()")
+
+    def __str__(self):
+        return self.name
+
+class user(models.Model):
+    name = models.CharField(max_length=200)
+    password = models.CharField(max_length=200)
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    address = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
