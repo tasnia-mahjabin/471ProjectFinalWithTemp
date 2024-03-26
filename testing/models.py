@@ -1,29 +1,7 @@
 from django.db import models
 from datetime import datetime 
 
-# Create your model
-class addData(models.Model):
-    name = models.CharField(max_length=200)
-    country = models.CharField(max_length=200)
-    price = models.IntegerField()
-
-    def __str__(self):
-        return self.name
-    
-
-class addProduct(models.Model):
-    name = models.CharField(max_length=200)
-    price = models.IntegerField()
-    catagory = models.CharField(max_length=200)
-    brand = models.CharField(max_length=50)
-    country = models.CharField(max_length=40)
-    img = models.ImageField(upload_to='media/')
-    description = models.CharField(max_length=500)
-
-    def __str__(self):
-        return self.name
-    
-
+# Create your model  
 class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
     price = models.IntegerField()
@@ -39,12 +17,13 @@ class Product(models.Model):
     def __str__(self):
         return self.name
 
-class user(models.Model):
-    name = models.CharField(max_length=200)
-    password = models.CharField(max_length=200)
-    email = models.EmailField()
-    phone = models.CharField(max_length=20)
-    address = models.CharField(max_length=100)
+ 
+class combo(models.Model):
+    combo_name = models.CharField(max_length=20)
+    combo_products = models.ManyToManyField(Product)
+    combo_price = models.IntegerField()
 
     def __str__(self):
         return self.name
+
+

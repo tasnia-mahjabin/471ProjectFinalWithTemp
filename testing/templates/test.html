@@ -11,7 +11,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="author" content="Untree.co">
-  <link rel="shortcut icon" href="">
+  <link rel="shortcut icon" href="favicon.png">
 
   <meta name="description" content="" />
   <meta name="keywords" content="bootstrap, bootstrap4" />
@@ -21,15 +21,15 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 		<link href="/static/css/tiny-slider.css" rel="stylesheet">
 		<link href="/static/css/style.css" rel="stylesheet">
-		<title>Skin-care online </title>
+		<title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
 	</head>
 
 	<body>
 
 		<!-- Start Header/Navigation -->
-		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
+		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar" >
 
-			<div class="container">
+			<div class="container" style="background-color: darksalmon;">
 				<a class="navbar-brand" href="index.html">SkinC<span>.</span></a>
 
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
@@ -38,14 +38,14 @@
 
 				<div class="collapse navbar-collapse" id="navbarsFurni">
 					<ul class="custom-navbar-nav navbar-nav ms-auto mb-2 mb-md-0">
-						<li class="nav-item">
+						<li class="nav-item ">
 							<a class="nav-link" href="index.html">Home</a>
 						</li>
 						<li><a class="nav-link" href="shop.html">Shop</a></li>
-						<li><a class="nav-link" href="about.html">About us</a></li>
+						<li class="active"><a class="nav-link" href="about.html">About us</a></li>
 						<li><a class="nav-link" href="services.html">Services</a></li>
 						<li><a class="nav-link" href="blog.html">Blog</a></li>
-						<li class="active"><a class="nav-link" href="contact.html">Contact us</a></li>
+						<li><a class="nav-link" href="contact.html">Contact us</a></li>
 					</ul>
 
 					<ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
@@ -59,106 +59,92 @@
 		<!-- End Header/Navigation -->
 
 		<!-- Start Hero Section -->
-			<div class="hero">
+			<!-- <div class="hero">
 				<div class="container">
 					<div class="row justify-content-between">
 						<div class="col-lg-5">
 							<div class="intro-excerpt">
-								<h1>Admin Site</h1>
+								<h1>About Us</h1>
+								<p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
+								<p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
 							</div>
 						</div>
 						<div class="col-lg-7">
 							<div class="hero-img-wrap">
-								<!-- <div class="hero-img-wrap">
-									<img src="images/couch.png" class="img-fluid">
-								</div>
-								 -->
+								<img src="/static/images/couch.png" class="img-fluid">
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
+		<!-- End Hero Section -->
 
 		
-		<!-- Start Contact Form -->
-		<div class="untree_co-section">
-      <div class="container">
 
-        <div class="block">
-          <div class="row justify-content-center">
+		<!-- Start Why Choose Us Section -->
+		<div class="why-choose-section">
+			<div class="container">
+				<div class="row justify-content-between align-items-center">
+					<div class="col-lg-6">
+						<h2 class="section-title">Why Choose Us</h2>
+						<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
 
+						<div class="row my-5">
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="/static/images/truck.svg" alt="Image" class="imf-fluid">
+									</div>
+									<h3>Fast &amp; Free Shipping</h3>
+									<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+								</div>
+							</div>
 
-            <div class="col-md-8 col-lg-8 pb-4">
-                <h2 class="h3 mb-3 text-black" style="color: forestgreen;">Product Details</h2>
-                <h5> Product ID:{% if product %} {{ product.id }} {% endif %} </h5>
-                <form method="post" enctype="multipart/form-data" action="{% url 'update_product' product.id %}">
-                {% csrf_token %}
-			
-                <div class="row">
-                	<div class="form-group">
-                        <label class="text-black"  >Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{product.name}}">
-                    </div>
-                </div>
-                <div class="form-group">
-                  <label class="text-black" >Price</label>
-                  <input type="text" class="form-control" id="price"  name="price" value="{{product.price}}">
-                </div>
-                <div class="form-group">
-                    <label class="text-black"  >Catagory</label>
-                    <input type="text" class="form-control" id="catagory" name="catagory" value="{{product.catagory}}">
-                  </div>
-                  <div class="form-group">
-                    <label class="text-black"  >Brand</label>
-                    <input type="text" class="form-control" id="brand" name="brand" value="{{product.brand}}">
-                  </div>
-                  <div class="form-group">
-                    <label class="text-black" >Country</label>
-                    <input type="text" class="form-control" id="country" name="country" value="{{product.country}}">
-                  </div>
-				  <div class="form-group">
-					<label class="text-black" >Quantity</label>
-					
-					<input type="text" class="form-control" id="quantity"  name="quantity" value="{{product.quantity}}">
-				  </div>
-				  <div class="form-group">
-					<label class="text-black" >Exp. Date</label>
-					
-					<input type="text" class="form-control" id="date"  name="date" value="{{product.date}}">
-				  </div>
-				  <div class="form-group">
-					<label class="text-black" >Description</label>
-					
-					<input type="text" class="form-control" id="description"  name="description" value="{{product.description}}">
-				  </div>
-				  <!-- <div class="form-group mb-5">
-					<label class="text-black" for="message">Description</label>
-					<textarea name="description" class="form-control" id="description" cols="30" rows="5" value="{{product.description}}"></textarea>
-				  </div> -->
-                
-                  <div class="form-group mb-5">
-                    <label class="text-black" for="picture" >Product Image</label>
-                    <br>
-                    <input style="color:blue" type="file" id="picture" name="picture" accept="image/*" name="picture" required>
-                  </div>
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="/static/images/bag.svg" alt="Image" class="imf-fluid">
+									</div>
+									<h3>Easy to Shop</h3>
+									<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+								</div>
+							</div>
 
-                <button type="submit" class="btn btn-primary-hover-outline">Update</button>
-              </form>
-			  
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="/static/images/support.svg" alt="Image" class="imf-fluid">
+									</div>
+									<h3>24/7 Support</h3>
+									<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+								</div>
+							</div>
 
-            </div>
+							<div class="col-6 col-md-6">
+								<div class="feature">
+									<div class="icon">
+										<img src="/static/images/return.svg" alt="Image" class="imf-fluid">
+									</div>
+									<h3>Hassle Free Returns</h3>
+									<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
+								</div>
+							</div>
 
-          </div>
+						</div>
+					</div>
 
-        </div>
+					<div class="col-lg-5">
+						<div class="img-wrap">
+							<img src="/static/images/why-choose-us-img.jpg" alt="Image" class="img-fluid">
+						</div>
+					</div>
 
-      </div>
+				</div>
+			</div>
+		</div>
+		<!-- End Why Choose Us Section -->
 
 
-    </div>
-  </div>
-
-  <!-- End Contact Form -->
 
 		
 
@@ -167,13 +153,13 @@
 			<div class="container relative">
 
 				<div class="sofa-img">
-					<img src="/static/images/logo.png" alt="Image" class="img-fluid">
+					<img src="/static/images/sofa.png" alt="Image" class="img-fluid">
 				</div>
 
 				<div class="row">
 					<div class="col-lg-8">
 						<div class="subscription-form">
-							<h3 class="d-flex align-items-center"><span class="me-1"><img src="images/envelope-outline.svg" alt="Image" class="img-fluid"></span><span>Subscribe to Newsletter</span></h3>
+							<h3 class="d-flex align-items-center"><span class="me-1"><img src="/static/images/envelope-outline.svg" alt="Image" class="img-fluid"></span><span>Subscribe to Newsletter</span></h3>
 
 							<form action="#" class="row g-3">
 								<div class="col-auto">
@@ -195,7 +181,7 @@
 
 				<div class="row g-5 mb-5">
 					<div class="col-lg-4">
-						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">SkinC<span>.</span></a></div>
+						<div class="mb-4 footer-logo-wrap"><a href="#" class="footer-logo">Furni<span>.</span></a></div>
 						<p class="mb-4">Donec facilisis quam ut purus rutrum lobortis. Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique. Pellentesque habitant</p>
 
 						<ul class="list-unstyled custom-social">

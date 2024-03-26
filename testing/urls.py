@@ -5,10 +5,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    # path('about/', views.addQ, name='addQ'),
     path('demo/', views.demo, name='demo'),
     path('addu/', views.tryf, name='okay'),
-    path('signup/', views.addUser, name='signup'),
     path('see/',views.product_list, name= 'product'),
     path('',views.product_list_shop, name= 'shop_product'),
     path('success/', views.addProduct, name= 'addP'),

@@ -15,7 +15,7 @@
 
 from django.shortcuts import render,redirect,get_object_or_404
 from django.db import IntegrityError
-from .models import addData,Product,user
+from .models import Product
 from django.conf import settings
 from .forms import updateProduct
 from django.db.models import Q
@@ -49,7 +49,7 @@ from django.db.models import Q
 #         return render(request, 'about.html')
 
 def tryf(request):
-    return render(request, "sign-up.html")
+    return render(request, "test.html")
 def demo(request):
     return render(request, "editproduct.html")
 
@@ -69,11 +69,13 @@ def product_list(request):
     # Pass the products to the template
     return render(request, 'adminview.html', {'products': products})
 
+
+#SEARCH BOX
 def product_list_shop(request):
     # Retrieve all products from the database
     if request.method == 'POST':
         searched = request.POST.get('searched')
-        multiple_q = Q(Q(name__contains=searched) | Q(catagory__contains=searched))
+        multiple_q = Q(Q(name__contains=searched) | Q(catagory__contains=searched) | Q(brand__contains=searched))
         products = Product.objects.filter(multiple_q)
 
     else:
@@ -126,77 +128,46 @@ def delete_product(request, product_id):
 
 
 
-
-
-
-
 def update_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
 
     if request.method == 'POST':
-        name = request.POST.get('name',product.name)
-        price = request.POST.get('price',product.price)
-        catagory = request.POST.get('catagory',product.catagory)
-        brand = request.POST.get('brand',product.brand)
-        country = request.POST.get('country',product.country)
-        quantity = request.POST.get('quantity',product.quantity)
-        date = request.POST.get('date',product.date)
-        picture = request.FILES.get('picture',product.img)
-        description = request.POST.get('description',product.description)
+        name = request.POST.get('name', product.name)
+        price = request.POST.get('price', product.price)
+        catagory = request.POST.get('catagory', product.catagory)
+        brand = request.POST.get('brand', product.brand)
+        country = request.POST.get('country', product.country)
+        quantity = request.POST.get('quantity', product.quantity)
+        date = request.POST.get('date', product.date)
+        description = request.POST.get('description', product.description)
 
-        # if picture:
-        #     picture_url = f"{settings.MEDIA_URL}{picture.name}"
-        # else:
-        #     picture_url = product.img.url
+        picture = request.FILES.get('picture')
 
-        Product.objects.filter(id=product_id).update(
-            name=name,
-            price=price,
-            catagory=catagory,
-            brand=brand,
-            country=country,
-            quantity = quantity,
-            date = date,
-            img=f"{settings.MEDIA_URL}{picture}",
-            description=description
-        )
-    
-        
-            
+        # If no new picture is uploaded but there is an existing image in the database, keep it
+        if not picture and product.img:
+            picture = product.img
+
+        # Update the product object
+        product.name = name
+        product.price = price
+        product.catagory = catagory
+        product.brand = brand
+        product.country = country
+        product.quantity = quantity
+        product.date = date
+        product.description = description
+
+        # If a new picture is uploaded or there is an existing image, update the img field
+        if picture:
+            product.img = picture
+
+        product.save()
+
         return redirect('product')
-    # else:
-    #     form = ProductForm(instance=product)
-
-    # return render(request, 'update_price.html', {'form': form, 'product_id': product_id})
 
 
 
-    
 
-def addUser(request):
-    n=''
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        password = request.POST.get('password')
-        email = request.POST.get('email')
-        phone = request.POST.get('phone')
-        address = request.POST.get('address')
-
-
-        # Save the data to the database
-        user.objects.create(
-            name=name,
-            password = password,
-            email = email,
-            phone = phone,
-            address = address
-            
-        )
-        
-        n="Added"
-        return redirect('okay') 
-        # return render(request, 'editproduct.html',{'n':n})
-        # return redirect('success_page')  # Redirect to a success page or another view
 
 
 
