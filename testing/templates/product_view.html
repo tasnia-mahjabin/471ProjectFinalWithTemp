@@ -21,7 +21,7 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 		<link href="/static/css/tiny-slider.css" rel="stylesheet">
 		<link href="/static/css/style.css" rel="stylesheet">
-		<title>Furni Free Bootstrap 5 Template for Furniture and Interior Design Websites by Untree.co </title>
+		<title>SkinC.com </title>
 	</head>
 
 	<body>
@@ -29,7 +29,7 @@
 		<!-- Start Header/Navigation -->
 		<nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar" >
 
-			<div class="container" style="background-color: darksalmon;">
+			<div class="container">
 				<a class="navbar-brand" href="index.html">SkinC<span>.</span></a>
 
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsFurni" aria-controls="navbarsFurni" aria-expanded="false" aria-label="Toggle navigation">
@@ -56,6 +56,95 @@
 			</div>
 				
 		</nav>
+		<br>
+		{% if p %}
+
+		        <!-- Product Details Area Start -->
+				<div class="single-product-area section-padding-100 clearfix">
+					<div class="container-fluid">
+		
+						<div class="row">
+							<div class="col-12">
+								<nav aria-label="breadcrumb">
+									<ol class="breadcrumb mt-50">
+										<li class="breadcrumb-item"><a href="#">Home</a></li>
+										<li class="breadcrumb-item"><a href="#">Shop</a></li>
+										<li class="breadcrumb-item"><a href="#">{{p.name}}</a></li>
+										
+									</ol>
+								</nav>
+							</div>
+						</div>
+						
+						<div class="row">
+							<div class="col-12 col-lg-7">
+								<div class="single_product_thumb">
+									<div id="product_details_slider" class="carousel slide" data-ride="carousel">
+										<div class="carousel-inner">
+											<div class="carousel-item active">
+												<img class="d-block mx-auto" src="{{ p.img.url }}" alt="First slide" style="max-width: 500px; max-height: 600px;">
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							
+							<div class="col-12 col-lg-5">
+								<div class="single_product_desc">
+									<!-- Product Meta Data -->
+									<div class="product-meta-data">
+										<div class="line"></div>
+										
+											<h4 style="font-weight: bold; color: #000000e2; font-family:'Times New Roman', Times, serif; font-size:xx-large;">{{p.name}}</h4>
+										
+										
+										<!-- Ratings & Review -->
+										<div class="ratings-review mb-15 d-flex align-items-center justify-content-between">
+											<div class="review">
+												<a href="#">Write A Review</a>
+											</div>
+										</div>
+										<!-- Avaiable -->
+										{% if p.quantity != 0 %}
+										<p class="avaibility" style="color: green;"><i class="fa fa-circle"></i> In Stock</p>
+										{%else%}
+										<p class="avaibility" style="color: red;"><i class="fa fa-circle"></i> Out Of Stock</p>
+										{%endif%}
+
+									</div>
+									<div class="short_overview my-3">
+										<p style="font-weight: bold; color: #000000e2; font-family:'Times New Roman', Times, serif;" >Price: {{p.price}}৳</p>
+									</div>
+									<div class="short_overview my-3">
+										<p style="font-weight: bold; color: #000000e2; font-family:'Times New Roman', Times, serif;" >Category: {{p.catagory}}</p>
+									</div>
+									
+									<div class="short_overview my-3">
+										<p style="font-weight: bold; color: #000000e2; font-family:'Times New Roman', Times, serif;" >Country: {{p.country}}</p>
+									</div>
+
+									<div class="short_overview my-3">
+										<p style=" color: #000000e2; font-family:'Times New Roman', Times, serif; font-size: medium;" ><i class="fa fa-square"></i> Description: {{p.description}}</p>
+									</div>
+									
+									
+									<form class="cart clearfix" method="post">
+										<div class="cart-btn d-flex mb-50">
+											<p style=" font-weight: bold; color: #000000e2; font-family:'Times New Roman', Times, serif; font-size: medium;" >Quantity: </p>
+											<div class="quantity">
+												<input type="number" class="qty-text" id="qty" name="quantity" value="1" min="1" max="300">
+												
+											</div>
+										</div>
+										<button type="submit" name="addtocart" value="5" class="btn amado-btn">Add to cart</button>
+									</form>
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endif %}
 		<!-- End Header/Navigation -->
 
 		<!-- Start Hero Section -->
@@ -82,7 +171,7 @@
 		
 
 		<!-- Start Why Choose Us Section -->
-		<div class="why-choose-section">
+		<!-- <div class="why-choose-section">
 			<div class="container">
 				<div class="row justify-content-between align-items-center">
 					<div class="col-lg-6">
@@ -141,7 +230,7 @@
 
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- End Why Choose Us Section -->
 
 
@@ -152,9 +241,9 @@
 		<footer class="footer-section">
 			<div class="container relative">
 
-				<div class="sofa-img">
+				<!-- <div class="sofa-img">
 					<img src="/static/images/sofa.png" alt="Image" class="img-fluid">
-				</div>
+				</div> -->
 
 				<div class="row">
 					<div class="col-lg-8">

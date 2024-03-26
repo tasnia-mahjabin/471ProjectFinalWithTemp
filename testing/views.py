@@ -69,6 +69,10 @@ def product_list(request):
     # Pass the products to the template
     return render(request, 'adminview.html', {'products': products})
 
+def show_product(request, product_id):
+    p = get_object_or_404(Product, pk=product_id)
+
+    return render(request, 'product_view.html', {'p':p})
 
 #SEARCH BOX
 def product_list_shop(request):
