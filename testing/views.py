@@ -3,16 +3,6 @@
 # from testing.models import addData
 
 # # Create your views here.
-
-# def addQ(request):
-#     if request.method == 'POST':
-#         name= request.POST.get('name')
-#         country= request.POST.get('country')
-#         price= request.POST.get('price')
-#         enter = addData(name=name, country=country,price=price)
-#         enter.save()
-#     return render(request, "about.html")
-
 from django.shortcuts import render,redirect,get_object_or_404
 from django.db import IntegrityError
 from .models import Product
@@ -61,22 +51,33 @@ def edit(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     return render(request, 'edit.html', {'product': product})
 
-
+# Function to show the products(admin)
 def product_list(request):
-    # Retrieve all products from the database
-    products = Product.objects.all()
+    order_by = request.GET.get('sort',None)
 
-    # Pass the products to the template
+    if order_by == 'asc':
+        products = Product.objects.all().order_by('rating')
+    elif order_by == 'desc':
+        products = Product.objects.all().order_by('-rating')
+    # elif order_by == 'price':
+    #     products = Product.objects.all().order_by('price')
+    # elif order_by == 'price':
+    #     products = Product.objects.all().order_by('price')
+    else:
+        products = Product.objects.all()
+
     return render(request, 'adminview.html', {'products': products})
 
+
+# Function to show product in the webpage
 def show_product(request, product_id):
     p = get_object_or_404(Product, pk=product_id)
 
     return render(request, 'product_view.html', {'p':p})
 
+
 #SEARCH BOX
 def product_list_shop(request):
-    # Retrieve all products from the database
     if request.method == 'POST':
         searched = request.POST.get('searched')
         multiple_q = Q(Q(name__contains=searched) | Q(catagory__contains=searched) | Q(brand__contains=searched))
@@ -85,11 +86,10 @@ def product_list_shop(request):
     else:
         products = Product.objects.all()
 
-    # Pass the products to the template
     return render(request, 'shop.html', {'products': products})
 
 
-
+# Function to add the products(admin)
 def addProduct(request):
     n=''
     if request.method == 'POST':
@@ -118,11 +118,9 @@ def addProduct(request):
         
         n="Added"
         return redirect('product') 
-        # return render(request, 'editproduct.html',{'n':n})
-        # return redirect('success_page')  # Redirect to a success page or another view
     
 
-    
+# Function to delete products(admin)   
 def delete_product(request, product_id):
     product = get_object_or_404(Product, pk=product_id)
     product.delete()
@@ -130,8 +128,7 @@ def delete_product(request, product_id):
    
 
 
-
-
+# Function to update products(admin)
 def update_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
 

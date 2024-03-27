@@ -85,9 +85,28 @@
             <div class="container">
               <div class="row mb-5">
 				<div class="col-lg-5 mx-auto text-center">
-					<h2 class="section-title" style="color:green">Product Details</h2>
+					<h2 class="section-title" style="color:green; font-weight: bold;">Product Details</h2>
 				</div>
-                <form class="col-md-12" method="post">
+	
+		<!-- Start Sorting the products (ADMIN VIEW) -->
+              
+				<form class="col-md-12" method="get" action="{% url 'product' %}">
+					<div class="row">
+						<div class="col-md-3">
+							<label for="sort">Sort by:</label>
+							<select class="form-select" id="sort" name="sort" onchange="this.form.submit()">
+								<option value="">-- Select --</option>
+								<option value="asc">Rating [Low To High]</option>
+								<option value="desc">Rating [High To Low]</option>
+								<!-- <option value="price">By Price</option> -->
+							</select>
+						</div>
+					</div>
+				</form>
+				
+		<!-- End Sorting the products (ADMIN VIEW) -->
+
+
                   <div class="site-blocks-table">
                     <table class="table">
                       <thead>
@@ -125,7 +144,7 @@
                       </tbody>
                     </table>
                   </div>
-                </form>
+                
               </div>
 			  <p><a href="{% url 'demo'%}" class="btn btn-secondary me-2">Add More Product</a></p>
 			  
@@ -188,7 +207,10 @@
 		
 	
 			</div>	
-		</div>	<!-- Start Footer Section -->
+		</div>	
+		
+		
+		<!-- Start Footer Section -->
 		<footer class="footer-section">
 			<div class="container relative">
 
