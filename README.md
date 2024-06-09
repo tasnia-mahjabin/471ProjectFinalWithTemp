@@ -1,1 +1,1 @@
-# project471
+# SkinC: An Online Platform for Skincare 
